@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/server/node-build.mjs",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist/spa" }
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "dist/server/node-build.mjs" },
+    { "src": "/(.*)", "dest": "dist/spa/$1" }
+  ]
+}
